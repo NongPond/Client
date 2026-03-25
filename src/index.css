@@ -1,0 +1,409 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    font-family: 'Prompt', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  }
+}
+
+:root {
+  font-family: 'Prompt', system-ui, Avenir, Helvetica, Arial, sans-serif; 
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* ================= GLOBAL DARK THEME ================= */
+
+body {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* ================= FULLCALENDAR FIXED ================= */
+
+/* ❌ ห้ามใช้ .fc global เด็ดขาด */
+
+/* ===== BASE ===== */
+.calendar-wrapper .fc {
+  font-size: 14px;
+}
+
+/* ===== LIGHT MODE ===== */
+.calendar-wrapper .fc {
+  background: white;
+  color: #111827;
+}
+
+/* grid */
+.calendar-wrapper .fc-theme-standard td,
+.calendar-wrapper .fc-theme-standard th {
+  border-color: #e5e7eb;
+}
+
+/* header วัน */
+.calendar-wrapper .fc-col-header {
+  background: #f9fafb;
+}
+
+.calendar-wrapper .fc-col-header-cell {
+  color: #374151;
+  font-weight: 600;
+}
+
+/* ช่องเวลา */
+.calendar-wrapper .fc-timegrid-slot {
+  background: #ffffff;
+}
+
+/* today */
+.calendar-wrapper .fc-day-today {
+  background: #ede9fe !important;
+}
+
+/* title (March 2026) */
+.calendar-wrapper .fc-toolbar-title {
+  color: #111827;
+  font-weight: 700;
+}
+
+/* ปุ่ม */
+.calendar-wrapper .fc-button {
+  background: #e5e7eb;
+  border: none;
+  color: #111827;
+  border-radius: 8px;
+}
+
+.calendar-wrapper .fc-button:hover {
+  background: #d1d5db;
+}
+
+.calendar-wrapper .fc-button-active {
+  background: #7c3aed !important;
+  color: white !important;
+}
+
+/* ===== EVENT FIX ===== */
+.calendar-wrapper .fc-event {
+  border-radius: 8px;
+  padding: 2px 6px;
+  font-size: 12px;
+
+  opacity: 1 !important;
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* event text */
+.calendar-wrapper .fc-event-title {
+  color: white !important;
+  font-weight: 500;
+}
+
+/* month view text */
+.calendar-wrapper .fc-daygrid-event .fc-event-title {
+  color: #111827 !important;
+}
+
+.dark .calendar-wrapper .fc-daygrid-event .fc-event-title {
+  color: white !important;
+}
+
+/* กัน event เป็นจุด */
+.calendar-wrapper .fc-daygrid-event {
+  white-space: normal !important;
+}
+
+/* ===== DARK MODE ===== */
+.dark .calendar-wrapper .fc {
+  background: #111827;
+  color: white;
+}
+
+.dark .calendar-wrapper .fc-col-header {
+  background: #1f2937;
+}
+
+.dark .calendar-wrapper .fc-col-header-cell {
+  color: #cbd5f5;
+}
+
+.dark .calendar-wrapper .fc-timegrid-slot {
+  background: #0f172a;
+}
+
+.dark .calendar-wrapper .fc-day-today {
+  background: rgba(124, 58, 237, 0.2) !important;
+}
+
+.dark .calendar-wrapper .fc-toolbar-title {
+  color: white;
+}
+
+.dark .calendar-wrapper .fc-button {
+  background: #374151;
+  color: white;
+}
+
+.dark .calendar-wrapper .fc-button-active {
+  background: #7c3aed !important;
+}
+
+/* ================= INPUT / SELECT ================= */
+
+select,
+input,
+textarea {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  border: 1px solid #334155;
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.3);
+}
+
+/* ================= BUTTON OVERRIDE ================= */
+
+button {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  color: #e2e8f0;
+}
+
+button:hover {
+  background-color: #334155;
+  border-color: #7c3aed;
+}
+
+.responsive-layout {
+  @apply flex flex-col md:flex-row gap-4 md:gap-6 p-4 md:p-6;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+/* ===== LIGHT MODE ===== */
+.calendar-wrapper .fc {
+  background: white;
+  color: black;
+}
+
+/* grid */
+.calendar-wrapper .fc-theme-standard td,
+.calendar-wrapper .fc-theme-standard th {
+  border-color: #e5e7eb;
+}
+
+/* header วัน */
+.calendar-wrapper .fc-col-header {
+  background: #f9fafb;
+}
+
+.calendar-wrapper .fc-col-header-cell {
+  color: #374151;
+  font-weight: 600;
+}
+
+/* ช่องเวลา */
+.calendar-wrapper .fc-timegrid-slot {
+  background: #ffffff;
+}
+
+/* today */
+.calendar-wrapper .fc-day-today {
+  background: #ede9fe !important;
+}
+
+/* ปุ่ม */
+.calendar-wrapper .fc-button {
+  background: #e5e7eb;
+  border: none;
+  color: black;
+  border-radius: 8px;
+}
+
+.calendar-wrapper .fc-button:hover {
+  background: #d1d5db;
+}
+
+.calendar-wrapper .fc-button-active {
+  background: #7c3aed !important;
+  color: white !important;
+}
+
+/* ===== DARK MODE ===== */
+.dark .calendar-wrapper .fc {
+  background: #111827;
+  color: white;
+}
+
+.dark .calendar-wrapper .fc-col-header {
+  background: #1f2937;
+}
+
+.dark .calendar-wrapper .fc-col-header-cell {
+  color: #cbd5f5;
+}
+
+.dark .calendar-wrapper .fc-timegrid-slot {
+  background: #0f172a;
+}
+
+.dark .calendar-wrapper .fc-day-today {
+  background: rgba(124, 58, 237, 0.2) !important;
+}
+
+.dark .calendar-wrapper .fc-button {
+  background: #374151;
+  color: white;
+}
+
+.dark .calendar-wrapper .fc-button-active {
+  background: #7c3aed !important;
+}
+
+.calendar-wrapper .fc-event {
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+/* TITLE (March 2026) */
+.calendar-wrapper .fc-toolbar-title {
+  color: #111827; /* ดำ */
+  font-weight: 600;
+}
+
+.dark .calendar-wrapper .fc-toolbar-title {
+  color: white;
+}
+
+/* EVENT TEXT */
+.calendar-wrapper .fc-event {
+  color: white !important;
+  font-weight: 500;
+}
+
+/* ถ้า background อ่อน → ใช้สีเข้ม */
+.calendar-wrapper .fc-daygrid-event {
+  color: #111827 !important;
+}
+
+.dark .calendar-wrapper .fc-daygrid-event {
+  color: white !important;
+}
+
+.calendar-wrapper .fc-toolbar-title {
+  background: linear-gradient(to right, #7c3aed, #6366f1);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeInUp 0.6s ease;
+}
+
