@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react"; // ✅ 1. เพิ่ม useRef
+import { useEffect, useState, useRef } from "react"; 
 import { useSearchParams, Link } from "react-router-dom";
 import axios from "axios"; 
 
@@ -23,7 +23,7 @@ export default function Verify() {
       hasFetched.current = true;
 
       try {
-        await axios.post("https://server-1-89ke.onrender.com/api/auth/verify", {
+        await axios.post("https://server-1-89ke.onrender.com", {
         token: token 
       });
         
