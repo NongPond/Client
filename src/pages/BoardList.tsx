@@ -18,7 +18,7 @@ export default function BoardList() {
   const fetchBoards = async () => {
 
     const res = await axios.get(
-      "http://localhost:5000/api/boards",
+      "https://server-1-89ke.onrender.com/api/boards",
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -192,7 +192,7 @@ export default function BoardList() {
         onClick={async () => {
 
           await axios.put(
-            `http://localhost:5000/api/boards/${board._id}/unarchive`,
+            `https://server-1-89ke.onrender.com/api/boards/${board._id}/unarchive`,
             {},
             {
               headers: {
@@ -251,7 +251,7 @@ export default function BoardList() {
             } else {
               // ปิดบอร์ดปกติ
               axios.put(
-                `http://localhost:5000/api/boards/${confirmBoard._id}/archive`,
+                `https://server-1-89ke.onrender.com/api/boards/${confirmBoard._id}/archive`,
                 {},
                 {
                   headers: {
@@ -330,7 +330,7 @@ export default function BoardList() {
           onClick={async () => {
             try {
               await axios.delete(
-                `http://localhost:5000/api/boards/${confirmBoard._id}`,
+                `https://server-1-89ke.onrender.com/api/boards/${confirmBoard._id}`,
                 {
                   headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -432,7 +432,7 @@ export default function BoardList() {
 
                   try {
                     await axios.post(
-                      "http://localhost:5000/api/boards",
+                      "https://server-1-89ke.onrender.com/api/boards",
                       { name: newBoardName },
                       {
                         headers: {

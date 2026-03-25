@@ -46,13 +46,13 @@ export default function AcceptInvite() {
       try {
 
         const res = await axios.get(
-          `http://localhost:5000/api/tasks/invite/${token}`,
-          {
-            headers: {
-              Authorization: `Bearer ${authToken}`
-            }
+        `https://server-1-89ke.onrender.com/api/tasks/invite/${token}`, 
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`
           }
-        );
+        }
+      );
 
         if (res.data?.boardId) {
 

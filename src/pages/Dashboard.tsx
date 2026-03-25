@@ -18,6 +18,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Tooltip from "../components/Tooltip";
 
+// 🌟 กำหนด Base URL ไว้ตรงนี้เพื่อให้จัดการง่ายขึ้น!
+const API_BASE_URL = "https://server-1-89ke.onrender.com";
+
 type Status = "todo" | "doing" | "done";
 
 type Task = {
@@ -119,7 +122,8 @@ useEffect(() => {
 
   if (!boardId) return;
 
-  axios.get(`http://localhost:5000/api/boards/${boardId}`, {
+  // 🌟 ใช้ API_BASE_URL แทน localhost
+  axios.get(`${API_BASE_URL}/api/boards/${boardId}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`
     }
@@ -138,7 +142,8 @@ const [user, setUser] = useState<any>(null);
 const [theme, setTheme] = useState("light");
 
 useEffect(() => {
-  axios.get("http://localhost:5000/api/auth/me", {
+  // 🌟 ใช้ API_BASE_URL แทน localhost
+  axios.get(`${API_BASE_URL}/api/auth/me`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`
     }
@@ -166,7 +171,8 @@ const getInitials = (name: string) =>
   const payload = JSON.parse(atob(token.split(".")[1]));
   const userId = payload.id;
 
-  const newSocket: Socket = io("http://localhost:5000", {
+  // 🌟 ใช้ API_BASE_URL แทน localhost
+  const newSocket: Socket = io(API_BASE_URL, {
     transports: ["websocket"]
   });
 
@@ -237,8 +243,9 @@ const getInitials = (name: string) =>
   const fetchBoards = async () => {
 
     try {
+      // 🌟 ใช้ API_BASE_URL แทน localhost
       const res = await axios.get(
-        "http://localhost:5000/api/boards",
+        `${API_BASE_URL}/api/boards`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`

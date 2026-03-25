@@ -23,9 +23,9 @@ export default function Verify() {
       hasFetched.current = true;
 
       try {
-        await axios.post("http://localhost:5000/api/auth/verify", {
-          token: token 
-        });
+        await axios.post("https://server-1-89ke.onrender.com/api/auth/verify", {
+        token: token 
+      });
         
         setStatus("success"); // สำเร็จ!
       } catch (error) {
