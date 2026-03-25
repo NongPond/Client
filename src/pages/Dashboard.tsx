@@ -50,7 +50,7 @@ export default function Dashboard() {
     { id: "done", title: "เสร็จ", tasks: [] }
   ]);
 
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
   const [openShare, setOpenShare] = useState(false);
   const [openTask, setOpenTask] = useState<Task | null>(null);
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -62,9 +62,8 @@ export default function Dashboard() {
   const [boards, setBoards] = useState<any[]>([]);
 
   const [search, setSearch] = useState("");
-  const [tab, setTab] = useState<"all" | "workspace">("all");
-  const [initialLoading, setInitialLoading] = useState(true);
   const [openProfile, setOpenProfile] = useState(false);
+
   const activeBoards = boards.filter(b => !b.archived);
   const [openWorkspace, setOpenWorkspace] = useState(true);
 
@@ -262,11 +261,6 @@ const getInitials = (name: string) =>
 const filteredBoards = activeBoards.filter(b =>
   b.name.toLowerCase().includes(search.toLowerCase())
 );
-
-
-const recentBoards = filteredBoards.slice(0, 4);
-const workspaceBoards = filteredBoards;
-
 
   /* ================= DRAG ================= */
 
