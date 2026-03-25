@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API = "http://localhost:5000/api/auth";
+// 🔥 เปลี่ยนตรงนี้เป็นลิงก์ Backend ของคุณ
+const BASE_URL = "https://server-1-89ke.onrender.com"; 
+const API = `${BASE_URL}/api/auth`;
 
 export const login = async (data: {
   email: string;
@@ -20,12 +22,12 @@ export const register = async (data: {
 };
 
 export const getMe = async () => {
-  const res = await axios.get("http://localhost:5000/api/auth/me", {
+  // 🔥 เปลี่ยนลิงก์ตรงนี้ด้วยครับ
+  const res = await axios.get(`${BASE_URL}/api/auth/me`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`
     }
   });
 
   return res.data;
-
 };

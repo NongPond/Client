@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API = "http://localhost:5000/api/notifications";
+// 🔥 เปลี่ยนจาก localhost เป็นลิงก์หลังบ้าน
+const API = "https://server-1-89ke.onrender.com/api/notifications";
 
 const getAuth = () => ({
   headers: {
