@@ -23,9 +23,10 @@ export default function Verify() {
       hasFetched.current = true;
 
       try {
-        await axios.post("https://server-1-89ke.onrender.com", {
-        token: token 
-      });
+        // แก้เป็น Path ที่ถูกต้องของคุณ เช่น /api/auth/verify-email
+        await axios.post("https://server-1-89ke.onrender.com/api/auth/verify", { 
+  token: token 
+});
         
         setStatus("success"); // สำเร็จ!
       } catch (error) {
