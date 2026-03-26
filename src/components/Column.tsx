@@ -195,14 +195,16 @@ export default function Column({
             type="datetime-local"
             value={startTime}
             onChange={e => setStartTime(e.target.value)}
-            className="w-full mb-2 p-1 rounded bg-gray-800 text-white text-sm"
+            // 👇 เติม dark:[color-scheme:dark] ไว้ท้ายสุด
+            className="w-full mb-2 p-1 rounded bg-gray-800 text-white text-sm dark:[color-scheme:dark]" 
           />
 
           <input
             type="datetime-local"
             value={endTime}
             onChange={e => setEndTime(e.target.value)}
-            className="w-full mb-2 p-1 rounded bg-gray-800 text-white text-sm"
+            // 👇 เติม dark:[color-scheme:dark] ไว้ท้ายสุด
+            className="w-full mb-2 p-1 rounded bg-gray-800 text-white text-sm dark:[color-scheme:dark]"
           />
 
           {error && (

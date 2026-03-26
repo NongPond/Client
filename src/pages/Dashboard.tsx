@@ -383,18 +383,18 @@ const filteredBoards = activeBoards.filter(b =>
         {boardId && ` - ${boardName}`}
       </div>
 
-        <div className="flex flex-wrap items-center justify-end gap-2 md:gap-4 flex-1">
+        <div className="flex flex-wrap items-center justify-end gap-1.5 sm:gap-2 md:gap-4 flex-1">
           
         {/* SWITCH BOARD */}
         <div className="relative">
-
-        <Tooltip text="สลับบอร์ด">
-        <button
-          onClick={() => setOpenBoards(prev => !prev)}
-          className="bg-white text-black px-3 py-1 rounded text-sm"
-        >
-          สลับบอร์ด
-        </button>
+    <Tooltip text="สลับบอร์ด">
+      <button
+        onClick={() => setOpenBoards(prev => !prev)}
+        className="bg-white text-black px-2.5 sm:px-3 py-1.5 rounded text-sm flex items-center gap-1.5"
+      >
+        <span>🔄</span>
+        <span className="hidden sm:inline">สลับบอร์ด</span>
+      </button>
         </Tooltip>
 
       {openBoards && (
@@ -539,47 +539,43 @@ const filteredBoards = activeBoards.filter(b =>
 
 <Tooltip text="บอร์ด">
     <button
-            onClick={() => setView("board")}
-            className={`px-3 py-1 rounded text-sm ${
-              view === "board"
-                ? "bg-white text-black"
-                : "bg-purple-600"
-            }`}
-          >
-            📋 บอร์ด
-          </button>
-</Tooltip>
+      onClick={() => setView("board")}
+      className={`px-2.5 sm:px-3 py-1.5 rounded text-sm flex items-center gap-1.5 ${
+        view === "board" ? "bg-white text-black" : "bg-purple-600 text-white"
+      }`}
+    >
+      <span>📋</span>
+      <span className="hidden sm:inline">บอร์ด</span>
+    </button>
+  </Tooltip>
 
 <Tooltip text="ปฏิทิน">
-          <button
-            onClick={() => setView("calendar")}
-            className={`px-3 py-1 rounded text-sm ${
-              view === "calendar"
-                ? "bg-white text-black"
-                : "bg-purple-600"
-            }`}
-          >
-            📅 ปฏิทิน
-          </button>
-</Tooltip>
+    <button
+      onClick={() => setView("calendar")}
+      className={`px-2.5 sm:px-3 py-1.5 rounded text-sm flex items-center gap-1.5 ${
+        view === "calendar" ? "bg-white text-black" : "bg-purple-600 text-white"
+      }`}
+    >
+      <span>📅</span>
+      <span className="hidden sm:inline">ปฏิทิน</span>
+    </button>
+  </Tooltip>
 
           <div className="relative">
 
 <Tooltip text="แจ้งเตือน">
-            <button
-              onClick={() => setOpenNoti(prev => !prev)}
-              className="relative bg-white text-black px-3 py-1 rounded text-sm"
-            >
-              🔔
-
-              {unreadCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-2 py-0.5 rounded-full">
-                  {unreadCount}
-                </span>
-              )}
-
-            </button>
-</Tooltip>
+      <button
+        onClick={() => setOpenNoti(prev => !prev)}
+        className="relative bg-white text-black px-2.5 sm:px-3 py-1.5 rounded text-sm flex items-center"
+      >
+        <span>🔔</span>
+        {unreadCount > 0 && (
+          <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold shadow-sm">
+            {unreadCount}
+          </span>
+        )}
+      </button>
+    </Tooltip>
 
             {openNoti && (
               <>
@@ -602,20 +598,21 @@ const filteredBoards = activeBoards.filter(b =>
           </div>
 
 <Tooltip text="แชร์บอร์ด">
-          <button
-            onClick={() => setOpenShare(true)}
-            className="bg-white text-black px-3 py-1 rounded text-sm"
-          >
-            👥 แชร์
-          </button>
-</Tooltip>
+    <button
+      onClick={() => setOpenShare(true)}
+      className="bg-white text-black px-2.5 sm:px-3 py-1.5 rounded text-sm flex items-center gap-1.5"
+    >
+      <span>👥</span>
+      <span className="hidden sm:inline">แชร์</span>
+    </button>
+  </Tooltip>
 
-        <div className="relative">
+        <div className="relative ml-1">
 
         {/* avatar */}
         <div
           onClick={() => setOpenProfile(prev => !prev)}
-          className="w-9 h-9 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold cursor-pointer"
+          className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold cursor-pointer"
         >
           {user ? getInitials(user.name) : "?"}
         </div>
