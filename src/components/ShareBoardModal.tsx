@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import { shareBoard } from "../services/taskService";
+import api from "../utils/axios"; // 🔥 นำเข้า api ของเรามาใช้
 
 type Member = {
   userId: string;
@@ -13,8 +14,10 @@ type Props = {
   onClose: () => void;
 };
 
-export default function ShareBoardModal({ boardId, onClose }: Props) {
+// 🔥 ลิงก์ Backend สำหรับ Socket
+const SOCKET_URL = "https://server-1-89ke.onrender.com";
 
+export default function ShareBoardModal({ boardId, onClose }: Props) {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState<"editor" | "member">("editor");
   const [members, setMembers] = useState<Member[]>([]);
@@ -30,18 +33,14 @@ export default function ShareBoardModal({ boardId, onClose }: Props) {
   const myEmail = payload?.email;
 
   /* LOAD MEMBERS */
-
   const loadMembers = async () => {
-    const res = await fetch(
-      `http://localhost:5000/api/tasks/board/${boardId}/members`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    );
-    const data = await res.json();
-    setMembers(data);
+    try {
+      // 🎉 เปลี่ยนจาก fetch เป็น api โค้ดสั้นลง ไม่ต้องแนบ Token เองแล้ว
+      const res = await api.get(`/api/tasks/board/${boardId}/members`);
+      setMembers(res.data);
+    } catch (err) {
+      console.error("Failed to load members", err);
+    }
   };
 
   useEffect(() => {
@@ -49,9 +48,11 @@ export default function ShareBoardModal({ boardId, onClose }: Props) {
   }, [boardId]);
 
   /* REALTIME */
-
   useEffect(() => {
-    const socket = io("http://localhost:5000");
+    // 🔥 แก้ URL และบังคับใช้ websocket เพื่อแก้ปัญหา polling error
+    const socket = io(SOCKET_URL, {
+      transports: ["websocket"],
+    });
 
     socket.on("taskUpdated", () => {
       loadMembers();
@@ -63,7 +64,6 @@ export default function ShareBoardModal({ boardId, onClose }: Props) {
   }, []);
 
   /* SHARE */
-
   const handleShare = async () => {
     if (!email.trim()) {
       setError("กรุณากรอกอีเมล");
@@ -88,50 +88,36 @@ export default function ShareBoardModal({ boardId, onClose }: Props) {
   };
 
   /* UPDATE ROLE */
-
   const updateRole = async (userId: string, newRole: string) => {
-    await fetch(
-      `http://localhost:5000/api/tasks/board/${boardId}/member/${userId}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ role: newRole })
-      }
-    );
-    loadMembers();
+    try {
+      // 🎉 ใช้ api ยิง PUT
+      await api.put(`/api/tasks/board/${boardId}/member/${userId}`, { role: newRole });
+      loadMembers();
+    } catch (err) {
+      console.error("Failed to update role", err);
+    }
   };
 
   /* REMOVE MEMBER */
-
   const removeMember = async (userId: string) => {
-    await fetch(
-      `http://localhost:5000/api/tasks/board/${boardId}/member/${userId}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    );
-    loadMembers();
+    try {
+      // 🎉 ใช้ api ยิง DELETE
+      await api.delete(`/api/tasks/board/${boardId}/member/${userId}`);
+      loadMembers();
+    } catch (err) {
+      console.error("Failed to remove member", err);
+    }
   };
 
   /* LEAVE BOARD */
-
   const leaveBoard = async () => {
-    await fetch(
-      `http://localhost:5000/api/tasks/${boardId}/leave`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    );
-    window.location.reload();
+    try {
+      // 🎉 ใช้ api ยิง POST
+      await api.post(`/api/tasks/${boardId}/leave`);
+      window.location.reload();
+    } catch (err) {
+      console.error("Failed to leave board", err);
+    }
   };
 
   const myMember = members.find(m => m.email === myEmail);

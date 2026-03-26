@@ -1,15 +1,14 @@
-import axios from "axios";
+import api from "../utils/axios";
 
-// 🔥 เปลี่ยนตรงนี้เป็นลิงก์ Backend ของคุณ
-const BASE_URL = "https://server-1-89ke.onrender.com"; 
-const API = `${BASE_URL}/api/auth`;
+// 🔥 กำหนดแค่ Path ย่อย เพราะ Base URL ถูกตั้งไว้ใน api แล้ว
+const ENDPOINT = "/api/auth";
 
 export const login = async (data: {
   email: string;
   password: string;
 }) => {
-  const res = await axios.post(`${API}/login`, data);
-  localStorage.setItem("token", res.data.token);
+  const res = await api.post(`${ENDPOINT}/login`, data);
+  localStorage.setItem("token", res.data.token); // เก็บ Token ไว้ใช้เหมือนเดิม
   return res.data;
 };
 
@@ -18,16 +17,11 @@ export const register = async (data: {
   email: string;
   password: string;
 }) => {
-  return axios.post(`${API}/register`, data);
+  return api.post(`${ENDPOINT}/register`, data);
 };
 
 export const getMe = async () => {
-  // 🔥 เปลี่ยนลิงก์ตรงนี้ด้วยครับ
-  const res = await axios.get(`${BASE_URL}/api/auth/me`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`
-    }
-  });
-
+  // 🎉 ไม่ต้องคอยเขียน headers แนบ Token เองแล้ว! api จัดการให้อัตโนมัติ
+  const res = await api.get(`${ENDPOINT}/me`);
   return res.data;
 };
