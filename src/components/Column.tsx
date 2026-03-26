@@ -197,9 +197,9 @@ export default function Column({
               type="datetime-local"
               value={startTime}
               onChange={e => setStartTime(e.target.value)}
-              // 👇 ใส่เงื่อนไข: ถ้ายังไม่เลือกเวลา ให้ซ่อนตัวหนังสือ (text-transparent)
+              // 👇 เปลี่ยนมาใช้ opacity-0 ซ่อนเฉพาะส่วนข้อความ และเพิ่ม padding ให้ข้อความซ้อนไม่ทับไอคอน
               className={`w-full p-2 h-10 rounded bg-gray-800 text-white text-sm focus:outline-none [color-scheme:dark] ${
-                !startTime ? "[&::-webkit-datetime-edit]:text-transparent" : ""
+                !startTime ? "[&::-webkit-datetime-edit-fields-wrapper]:opacity-0" : ""
               }`}
             />
             {/* 👇 Placeholder ปลอมที่จะโชว์ขึ้นมาทับตอนกล่องว่าง */}
@@ -216,8 +216,9 @@ export default function Column({
               type="datetime-local"
               value={endTime}
               onChange={e => setEndTime(e.target.value)}
+              // 👇 เปลี่ยนมาใช้ opacity-0 ซ่อนเฉพาะส่วนข้อความ
               className={`w-full p-2 h-10 rounded bg-gray-800 text-white text-sm focus:outline-none [color-scheme:dark] ${
-                !endTime ? "[&::-webkit-datetime-edit]:text-transparent" : ""
+                !endTime ? "[&::-webkit-datetime-edit-fields-wrapper]:opacity-0" : ""
               }`}
             />
             {!endTime && (
