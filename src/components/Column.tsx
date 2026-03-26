@@ -48,15 +48,11 @@ export default function Column({
   })
 
   /* แปลงเวลาให้ input ใช้ได้ */
-
   const formatInputDate = (date: string) => {
-
     const d = new Date(date)
-
     const year = d.getFullYear()
     const month = String(d.getMonth() + 1).padStart(2, "0")
     const day = String(d.getDate()).padStart(2, "0")
-
     const hour = String(d.getHours()).padStart(2, "0")
     const minute = String(d.getMinutes()).padStart(2, "0")
 
@@ -64,9 +60,7 @@ export default function Column({
   }
 
   const submitAdd = async () => {
-
     /* MEMBER เพิ่มไม่ได้ */
-
     if (permission === "viewer") {
       setError("คุณไม่มีสิทธิ์เพิ่มงาน")
       return
@@ -90,38 +84,33 @@ export default function Column({
       return
     }
 
+    // 🔥 แก้ไข: แปลงเป็น ISOString ก่อนส่งไป API เพื่อป้องกันเวลาเพี้ยน (Timezone)
     const result = await createTask({
       title: newTitle,
       status: column.id,
-      startTime,
-      endTime,
+      startTime: new Date(startTime).toISOString(), 
+      endTime: new Date(endTime).toISOString(),
       boardId,
       category: category.trim() || undefined
     })
 
     if (result.success) {
-
       onAdd(column.id, result.data)
-
       setNewTitle("")
       setCategory("")
       setStartTime("")
       setEndTime("")
       setAdding(false)
-
       return
     }
 
     if ("conflict" in result && result.conflict) {
-
       setSuggestions(
         result.suggestions ||
         (result.suggestion ? [result.suggestion] : [])
       )
-
       setError("เวลาซ้ำ กรุณาเลือกช่วงเวลาที่แนะนำ")
       return
-
     }
 
     if ("message" in result) {
@@ -133,7 +122,7 @@ export default function Column({
   }
 
   return (
-      <div className="
+    <div className="
         w-full sm:w-72 md:w-80
         rounded p-4 flex flex-col
         bg-white text-black
@@ -143,19 +132,15 @@ export default function Column({
       <h2 className="font-semibold mb-4">{column.title}</h2>
 
       <div
-      ref={setNodeRef}
-      className="flex-1 min-h-[150px]"
-    >
-
+        ref={setNodeRef}
+        className="flex-1 min-h-[150px]"
+      >
         <SortableContext
           items={column.tasks.map((t: any) => t._id)}
           strategy={verticalListSortingStrategy}
         >
-
           <div className="flex flex-col gap-3">
-
             {column.tasks.map((task: any) => (
-
               <TaskCard
                 key={task._id}
                 task={task}
@@ -163,19 +148,13 @@ export default function Column({
                 onSelect={onSelect}
                 selected={selectedTask?._id === task._id}
               />
-
             ))}
-
           </div>
-
         </SortableContext>
-
       </div>
 
       {adding ? (
-
         <div className="mt-3">
-
           <input
             value={newTitle}
             onChange={e => setNewTitle(e.target.value)}
@@ -191,18 +170,17 @@ export default function Column({
             placeholder="หมวดหมู่"
           />
 
-         {/* กล่องเวลาเริ่มต้น */}
+          {/* กล่องเวลาเริ่มต้น */}
           <div className="relative w-full mb-2">
             <input
               type="datetime-local"
               value={startTime}
               onChange={e => setStartTime(e.target.value)}
-              // 👇 เปลี่ยนมาใช้ opacity-0 ซ่อนเฉพาะส่วนข้อความ และเพิ่ม padding ให้ข้อความซ้อนไม่ทับไอคอน
+              // 🔥 แก้ไข: ใช้ fields-wrapper:opacity-0 เพื่อให้ไอคอนปฏิทินไม่หาย
               className={`w-full p-2 h-10 rounded bg-gray-800 text-white text-sm focus:outline-none [color-scheme:dark] ${
                 !startTime ? "[&::-webkit-datetime-edit-fields-wrapper]:opacity-0" : ""
               }`}
             />
-            {/* 👇 Placeholder ปลอมที่จะโชว์ขึ้นมาทับตอนกล่องว่าง */}
             {!startTime && (
               <div className="absolute inset-y-0 left-2 flex items-center pointer-events-none text-gray-400 text-sm">
                 🗓️ เลือกเวลาเริ่มต้น...
@@ -216,7 +194,7 @@ export default function Column({
               type="datetime-local"
               value={endTime}
               onChange={e => setEndTime(e.target.value)}
-              // 👇 เปลี่ยนมาใช้ opacity-0 ซ่อนเฉพาะส่วนข้อความ
+              // 🔥 แก้ไข: ใช้ fields-wrapper:opacity-0 เพื่อให้ไอคอนปฏิทินไม่หาย
               className={`w-full p-2 h-10 rounded bg-gray-800 text-white text-sm focus:outline-none [color-scheme:dark] ${
                 !endTime ? "[&::-webkit-datetime-edit-fields-wrapper]:opacity-0" : ""
               }`}
@@ -235,51 +213,36 @@ export default function Column({
           )}
 
           {suggestions.length > 0 && (
-
             <div className="bg-yellow-600 text-black p-2 rounded text-xs mb-2 space-y-2">
-
               <div className="font-semibold">แนะนำเวลา</div>
-
               {suggestions.map((s: Suggestion, i: number) => (
-
                 <div key={i} className="bg-yellow-500 p-2 rounded">
-
                   {new Date(s.suggestedStart).toLocaleString()}
                   {" - "}
                   {new Date(s.suggestedEnd).toLocaleString()}
-
                   <button
                     onClick={() => {
-
                       setStartTime(formatInputDate(s.suggestedStart))
                       setEndTime(formatInputDate(s.suggestedEnd))
-
                       setSuggestions([])
                       setError("")
-
                     }}
                     className="block mt-2 bg-green-600 text-white px-2 py-1 rounded"
                   >
                     ใช้เวลานี้
                   </button>
-
                 </div>
-
               ))}
-
             </div>
-
           )}
 
           <div className="flex gap-2 mt-2">
-
             <button
               onClick={submitAdd}
               className="text-sm text-green-400 hover:text-green-300"
             >
               เพิ่มการ์ด
             </button>
-
             <button
               onClick={() => {
                 setAdding(false)
@@ -290,18 +253,14 @@ export default function Column({
             >
               ยกเลิก
             </button>
-
           </div>
-
         </div>
-
       ) : (
-
         permission !== "viewer" && (
           <button
             onClick={() => setAdding(true)}
             className="
-              mt-4 text-sm text-left
+              mt-4 text-sm text-left px-2 py-1 rounded
               bg-gray-200 text-black
               hover:bg-gray-300
               dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700
@@ -310,9 +269,7 @@ export default function Column({
             + เพิ่มการ์ด
           </button>
         )
-
       )}
-
     </div>
   )
 }
