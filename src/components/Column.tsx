@@ -191,21 +191,41 @@ export default function Column({
             placeholder="หมวดหมู่"
           />
 
-         <input
-            type="datetime-local"
-            value={startTime}
-            onChange={e => setStartTime(e.target.value)}
-            // 👇 สิ่งที่เปลี่ยนคือเพิ่ม h-10 และปรับ p-2
-            className="w-full mb-2 p-2 h-10 rounded bg-gray-800 text-white text-sm [color-scheme:dark] [&::-webkit-datetime-edit]:text-gray-200 [&::-webkit-calendar-picker-indicator]:bg-white [&::-webkit-calendar-picker-indicator]:p-1 [&::-webkit-calendar-picker-indicator]:rounded-sm" 
-          />
+         {/* กล่องเวลาเริ่มต้น */}
+          <div className="relative w-full mb-2">
+            <input
+              type="datetime-local"
+              value={startTime}
+              onChange={e => setStartTime(e.target.value)}
+              // 👇 ใส่เงื่อนไข: ถ้ายังไม่เลือกเวลา ให้ซ่อนตัวหนังสือ (text-transparent)
+              className={`w-full p-2 h-10 rounded bg-gray-800 text-white text-sm focus:outline-none [color-scheme:dark] ${
+                !startTime ? "[&::-webkit-datetime-edit]:text-transparent" : ""
+              }`}
+            />
+            {/* 👇 Placeholder ปลอมที่จะโชว์ขึ้นมาทับตอนกล่องว่าง */}
+            {!startTime && (
+              <div className="absolute inset-y-0 left-2 flex items-center pointer-events-none text-gray-400 text-sm">
+                🗓️ เลือกเวลาเริ่มต้น...
+              </div>
+            )}
+          </div>
 
-          <input
-            type="datetime-local"
-            value={endTime}
-            onChange={e => setEndTime(e.target.value)}
-            // 👇 สิ่งที่เปลี่ยนคือเพิ่ม h-10 และปรับ p-2
-            className="w-full mb-2 p-2 h-10 rounded bg-gray-800 text-white text-sm [color-scheme:dark] [&::-webkit-datetime-edit]:text-gray-200 [&::-webkit-calendar-picker-indicator]:bg-white [&::-webkit-calendar-picker-indicator]:p-1 [&::-webkit-calendar-picker-indicator]:rounded-sm"
-          />
+          {/* กล่องเวลาสิ้นสุด */}
+          <div className="relative w-full mb-2">
+            <input
+              type="datetime-local"
+              value={endTime}
+              onChange={e => setEndTime(e.target.value)}
+              className={`w-full p-2 h-10 rounded bg-gray-800 text-white text-sm focus:outline-none [color-scheme:dark] ${
+                !endTime ? "[&::-webkit-datetime-edit]:text-transparent" : ""
+              }`}
+            />
+            {!endTime && (
+              <div className="absolute inset-y-0 left-2 flex items-center pointer-events-none text-gray-400 text-sm">
+                🗓️ เลือกเวลาสิ้นสุด...
+              </div>
+            )}
+          </div>
 
           {error && (
             <div className="text-red-400 text-xs mb-2">
