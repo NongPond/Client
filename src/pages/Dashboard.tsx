@@ -369,9 +369,10 @@ const filteredBoards = activeBoards.filter(b =>
       dark:bg-gray-900 dark:text-white
     ">
       <header className="
-        h-14 w-full flex items-center justify-between px-6 shadow-md
+        min-h-[56px] h-auto w-full flex flex-wrap items-center justify-between px-4 sm:px-6 py-2 shadow-md z-30
         bg-gray-200 text-black
         dark:bg-gradient-to-r dark:from-purple-700 dark:to-purple-500 dark:text-white
+        gap-y-2
       ">
 
         <div
@@ -382,7 +383,7 @@ const filteredBoards = activeBoards.filter(b =>
         {boardId && ` - ${boardName}`}
       </div>
 
-        <div className="flex flex-wrap items-center gap-2 md:gap-4">
+        <div className="flex flex-wrap items-center justify-end gap-2 md:gap-4 flex-1">
           
         {/* SWITCH BOARD */}
         <div className="relative">
@@ -727,19 +728,20 @@ const filteredBoards = activeBoards.filter(b =>
             onDragEnd={handleDragEnd}
           >
 
-            <div className="flex flex-col md:flex-row gap-4 md:gap-6 p-4 md:p-6 overflow-x-auto min-h-[calc(100vh-56px)]">
+            <div className="flex flex-nowrap items-start gap-4 md:gap-6 p-4 md:p-6 overflow-x-auto min-h-[calc(100vh-56px)]">
 
               {columns.map(column => (
 
-                <Column
-                  key={column.id}
-                  column={column}
-                  boardId={boardId as string}
-                  permission={column.tasks[0]?.permission}
-                  onAdd={addTask}
-                  onDelete={deleteTaskById}
-                  onSelect={setOpenTask}
-                />
+             <div key={column.id} className="w-[85vw] sm:w-[320px] shrink-0">
+                  <Column
+                    column={column}
+                    boardId={boardId as string}
+                    permission={column.tasks[0]?.permission}
+                    onAdd={addTask}
+                    onDelete={deleteTaskById}
+                    onSelect={setOpenTask}
+                  />
+                </div>
 
               ))}
 
