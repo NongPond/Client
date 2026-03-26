@@ -195,16 +195,14 @@ export default function Column({
             type="datetime-local"
             value={startTime}
             onChange={e => setStartTime(e.target.value)}
-            // 👇 เอาคำว่า dark: ออก เหลือแค่ [color-scheme:dark]
-            className="w-full mb-2 p-1 rounded bg-gray-800 text-white text-sm [color-scheme:dark]" 
+            className="w-full mb-2 p-2 min-h-[36px] rounded bg-gray-800 text-white text-sm [color-scheme:dark] [&::-webkit-datetime-edit]:text-gray-200 [&::-webkit-calendar-picker-indicator]:bg-white [&::-webkit-calendar-picker-indicator]:p-1 [&::-webkit-calendar-picker-indicator]:rounded-sm" 
           />
 
           <input
             type="datetime-local"
             value={endTime}
             onChange={e => setEndTime(e.target.value)}
-            // 👇 เอาคำว่า dark: ออก เหลือแค่ [color-scheme:dark]
-            className="w-full mb-2 p-1 rounded bg-gray-800 text-white text-sm [color-scheme:dark]"
+            className="w-full mb-2 p-2 min-h-[36px] rounded bg-gray-800 text-white text-sm [color-scheme:dark] [&::-webkit-datetime-edit]:text-gray-200 [&::-webkit-calendar-picker-indicator]:bg-white [&::-webkit-calendar-picker-indicator]:p-1 [&::-webkit-calendar-picker-indicator]:rounded-sm"
           />
 
           {error && (
