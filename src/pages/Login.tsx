@@ -142,7 +142,7 @@ export default function Login() {
           {/* เพิ่ม Gradient overlay เบาๆ ให้รูปดูเนียนเข้ากับ Dark mode ทางซ้าย */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a] via-transparent to-transparent opacity-30 z-10 pointer-events-none"></div>
           <img
-            src="https://i.pinimg.com/1200x/92/7f/4d/927f4def98ce7e53ce822be34f0e1be6.jpg"
+            src="image.png"
             alt="Login Illustration"
             className="absolute inset-0 h-full w-full object-cover"
           />
