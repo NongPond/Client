@@ -191,18 +191,20 @@ export default function Column({
             placeholder="หมวดหมู่"
           />
 
-          <input
+         <input
             type="datetime-local"
             value={startTime}
             onChange={e => setStartTime(e.target.value)}
-            className="w-full mb-2 p-2 min-h-[36px] rounded bg-gray-800 text-white text-sm [color-scheme:dark] [&::-webkit-datetime-edit]:text-gray-200 [&::-webkit-calendar-picker-indicator]:bg-white [&::-webkit-calendar-picker-indicator]:p-1 [&::-webkit-calendar-picker-indicator]:rounded-sm" 
+            // 👇 สิ่งที่เปลี่ยนคือเพิ่ม h-10 และปรับ p-2
+            className="w-full mb-2 p-2 h-10 rounded bg-gray-800 text-white text-sm [color-scheme:dark] [&::-webkit-datetime-edit]:text-gray-200 [&::-webkit-calendar-picker-indicator]:bg-white [&::-webkit-calendar-picker-indicator]:p-1 [&::-webkit-calendar-picker-indicator]:rounded-sm" 
           />
 
           <input
             type="datetime-local"
             value={endTime}
             onChange={e => setEndTime(e.target.value)}
-            className="w-full mb-2 p-2 min-h-[36px] rounded bg-gray-800 text-white text-sm [color-scheme:dark] [&::-webkit-datetime-edit]:text-gray-200 [&::-webkit-calendar-picker-indicator]:bg-white [&::-webkit-calendar-picker-indicator]:p-1 [&::-webkit-calendar-picker-indicator]:rounded-sm"
+            // 👇 สิ่งที่เปลี่ยนคือเพิ่ม h-10 และปรับ p-2
+            className="w-full mb-2 p-2 h-10 rounded bg-gray-800 text-white text-sm [color-scheme:dark] [&::-webkit-datetime-edit]:text-gray-200 [&::-webkit-calendar-picker-indicator]:bg-white [&::-webkit-calendar-picker-indicator]:p-1 [&::-webkit-calendar-picker-indicator]:rounded-sm"
           />
 
           {error && (
