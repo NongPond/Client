@@ -377,10 +377,10 @@ const filteredBoards = activeBoards.filter(b =>
 
         <div
         onClick={() => navigate("/boards")}
-        className="font-bold text-xl cursor-pointer hover:opacity-80"
+        className="font-bold text-lg sm:text-xl cursor-pointer hover:opacity-80 break-words max-w-[200px] sm:max-w-none"
       >
         Task Management
-        {boardId && ` - ${boardName}`}
+        {boardId && <span className="text-sm sm:text-lg font-normal block sm:inline">{boardName ? ` - ${boardName}` : ""}</span>}
       </div>
 
         <div className="flex flex-wrap items-center justify-end gap-1.5 sm:gap-2 md:gap-4 flex-1">
@@ -390,7 +390,7 @@ const filteredBoards = activeBoards.filter(b =>
     <Tooltip text="สลับบอร์ด">
       <button
         onClick={() => setOpenBoards(prev => !prev)}
-        className="bg-white text-black px-2.5 sm:px-3 py-1.5 rounded text-sm flex items-center gap-1.5"
+        className="bg-white text-black px-2.5 sm:px-3 py-1.5 rounded text-sm flex items-center gap-1.5 shadow-sm"
       >
         <span>🔄</span>
         <span className="hidden sm:inline">สลับบอร์ด</span>
@@ -405,15 +405,15 @@ const filteredBoards = activeBoards.filter(b =>
             onClick={() => setOpenBoards(false)}
           />
 
-          {/* panel */}
+          {/* 📱 PANEL สลับบอร์ด: แก้ไขให้ Responsive เต็มรูปแบบ */}
           <div className="
-                absolute left-0 mt-2 w-[420px]
+                absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 mt-2 
+                w-[calc(100vw-2rem)] sm:w-[420px] max-w-[420px]
                 bg-white text-black
                 dark:bg-[#1f2937] dark:text-white
                 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700
                 z-50 p-4
-
-                max-h-[500px] overflow-y-auto
+                max-h-[80vh] sm:max-h-[500px] overflow-y-auto
               ">
 
             {/* SEARCH */}
@@ -445,10 +445,10 @@ const filteredBoards = activeBoards.filter(b =>
                     navigate(`/board/${board._id}`);
                     setOpenBoards(false);
                   }}
-                  className="h-[90px] rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition"
+                  className="h-[90px] rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition border border-gray-100 dark:border-gray-800"
                 >
                   <div className="h-[60%] bg-gradient-to-r from-purple-500 to-pink-500" />
-                  <div className="p-2 text-sm bg-gray-900 text-white">
+                  <div className="p-2 text-xs sm:text-sm bg-gray-900 text-white truncate">
                     {board.name}
                   </div>
                 </div>
@@ -459,7 +459,7 @@ const filteredBoards = activeBoards.filter(b =>
 
             // 🕒 ตอนปกติ (ไม่ค้นหา)
             <div className="mb-4">
-              <p className="text-sm text-gray-400 mb-2">🕒 เมื่อเร็ว ๆ นี้</p>
+              <p className="text-xs sm:text-sm text-gray-400 mb-2">🕒 เมื่อเร็ว ๆ นี้</p>
 
               <div className="grid grid-cols-2 gap-3">
                 {activeBoards.slice(0, 4).map(board => (
@@ -469,12 +469,11 @@ const filteredBoards = activeBoards.filter(b =>
                       navigate(`/board/${board._id}`);
                       setOpenBoards(false);
                     }}
-                    className="h-[90px] rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition"
+                    className="h-[90px] rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition border border-gray-100 dark:border-gray-800"
                   >
                     <div className="h-[60%] bg-gradient-to-r from-purple-500 to-pink-500" />
-                    <div className="p-2 text-sm bg-gray-900 text-white">
+                    <div className="p-2 text-xs sm:text-sm bg-gray-900 text-white truncate">
                       {board.name}
-
                     </div>
                   </div>
                 ))}
@@ -519,10 +518,10 @@ const filteredBoards = activeBoards.filter(b =>
                         navigate(`/board/${board._id}`);
                         setOpenBoards(false);
                       }}
-                      className="h-[90px] rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition"
+                      className="h-[90px] rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition border border-gray-100 dark:border-gray-800"
                     >
                       <div className="h-[60%] bg-gradient-to-r from-purple-500 to-pink-500" />
-                      <div className="p-2 text-sm bg-gray-900 text-white">
+                      <div className="p-2 text-xs sm:text-sm bg-gray-900 text-white truncate">
                         {board.name}
                       </div>
                     </div>
@@ -584,7 +583,8 @@ const filteredBoards = activeBoards.filter(b =>
                   onClick={() => setOpenNoti(false)}
                 />
 
-                <div className="absolute right-0 mt-2 w-80 bg-gray-800 rounded-lg shadow-2xl border border-gray-700 z-50">
+                {/* 📱 ป๊อปอัปแจ้งเตือนอัปเดตให้รองรับมือถือ */}
+                <div className="absolute right-0 mt-2 w-[calc(100vw-2rem)] sm:w-80 max-w-sm bg-gray-800 rounded-lg shadow-2xl border border-gray-700 z-50">
 
                   <NotificationDropdown
                     onClose={() => setOpenNoti(false)}
@@ -625,9 +625,9 @@ const filteredBoards = activeBoards.filter(b =>
               onClick={() => setOpenProfile(false)}
             />
 
-            {/* dropdown */}
+            {/* 📱 ป๊อปอัปโปรไฟล์อัปเดตให้รองรับมือถือ */}
             <div className="
-                  absolute right-0 mt-2 w-64
+                  absolute right-0 mt-2 w-[calc(100vw-2rem)] sm:w-64 max-w-xs
                   bg-white text-black border border-gray-200
                   dark:bg-[#1f2937] dark:text-white dark:border-gray-700
                   rounded-xl shadow-2xl z-50 p-4
@@ -635,15 +635,15 @@ const filteredBoards = activeBoards.filter(b =>
 
               {/* profile */}
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold">
+                <div className="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold shrink-0">
                   {user ? getInitials(user.name) : ""}
                 </div>
 
-                <div>
-                  <div className="font-semibold">
+                <div className="overflow-hidden">
+                  <div className="font-semibold truncate">
                     {user?.name || "กำลังโหลด..."}
                   </div>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-xs sm:text-sm text-gray-500 truncate">
                     {user?.email || ""}
                   </div>
                 </div>
@@ -668,7 +668,7 @@ const filteredBoards = activeBoards.filter(b =>
                 }}
                 className="
                     w-full px-4 py-2.5 rounded-xl text-left
-                    flex items-center gap-2
+                    flex items-center gap-2 text-sm
 
                     bg-gray-100 hover:bg-gray-200 text-gray-800
                     shadow-sm
@@ -691,7 +691,7 @@ const filteredBoards = activeBoards.filter(b =>
                 }}
                 className="
                   w-full px-4 py-2.5 rounded-xl text-left
-                  flex items-center gap-2
+                  flex items-center gap-2 text-sm
 
                   bg-red-50 hover:bg-red-100 text-red-600
                   shadow-sm
@@ -750,7 +750,7 @@ const filteredBoards = activeBoards.filter(b =>
 
         {view === "calendar" && (
 
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             <CalendarView
               tasks={columns.flatMap(col => col.tasks)}
             />
@@ -797,17 +797,17 @@ const filteredBoards = activeBoards.filter(b =>
       )}
 
           {errorMsg && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 transition-opacity">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4 transition-opacity">
           
           <div className="
-            w-[360px] 
+            w-full max-w-[360px] 
             bg-white dark:bg-[#0f172a] 
             border border-gray-200 dark:border-white/10 
             rounded-2xl shadow-2xl p-6 relative
             transition-colors duration-200
           ">
 
-            {/* close button (แก้ UI ปุ่มปิดให้สวยเนียนเข้ากับธีมใหม่) */}
+            {/* close button */}
             <button
               onClick={() => setErrorMsg(null)}
               className="
