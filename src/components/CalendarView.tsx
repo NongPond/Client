@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import * as htmlToImage from "html-to-image";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -15,9 +15,33 @@ type Task = {
 };
 
 export default function CalendarView({ tasks }: { tasks: Task[] }) {
-
   const [selectedCategory, setSelectedCategory] = useState("ทั้งหมด");
-  const calendarRef = useRef<HTMLDivElement>(null);
+  const [calendarView, setCalendarView] = useState("timeGridWeek");
+  
+  const calendarRef = useRef<HTMLDivElement>(null); // สำหรับดาวน์โหลดภาพ
+  const fullCalendarRef = useRef<FullCalendar>(null); // สำหรับควบคุม FullCalendar API
+
+  // ตรวจจับขนาดหน้าจอเพื่อปรับเปลี่ยน View ของ FullCalendar ให้เหมาะกับมือถือผ่าน API
+  useEffect(() => {
+    const handleResize = () => {
+      const newView = window.innerWidth < 768 ? "timeGridDay" : "timeGridWeek";
+      
+      if (newView !== calendarView) {
+        setCalendarView(newView);
+        
+        // เรียกใช้งาน API เพื่อสลับหน้าจอมุมมองปฏิทิน
+        if (fullCalendarRef.current) {
+          fullCalendarRef.current.getApi().changeView(newView);
+        }
+      }
+    };
+
+    // เรียกทำงานครั้งแรกตอนคอมโพเนนต์ถูกติดตั้ง
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [calendarView]);
 
   const categories = useMemo(() => {
     const unique = new Set<string>();
@@ -73,30 +97,30 @@ export default function CalendarView({ tasks }: { tasks: Task[] }) {
   };
 
   return (
-
     <div className="
-      rounded-3xl p-8 min-h-[85vh] shadow-2xl
+      rounded-3xl p-4 sm:p-6 md:p-8 min-h-[85vh] shadow-2xl
       bg-white text-black border border-gray-200
       dark:bg-[#0f172a] dark:text-white dark:border-slate-800
     ">
 
       {/* HEADER */}
-      <div className="mb-8 flex justify-between items-center">
+      <div className="mb-6 md:mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
 
-        <div className="text-2xl font-semibold tracking-wide text-black dark:text-white">
+        <div className="text-xl md:text-2xl font-semibold tracking-wide text-black dark:text-white">
           📅 ปฏิทินงาน
         </div>
 
-        <div className="flex items-center gap-4">
+        {/* ปุ่มกดและกล่องเลือกขยายเต็มความกว้างในมือถือเพื่อให้กดง่าย */}
+        <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
 
           {/* SELECT */}
-          <div className="relative">
+          <div className="relative flex-1 sm:flex-none">
             <select
               value={selectedCategory}
               onChange={e => setSelectedCategory(e.target.value)}
               className="
-                appearance-none
-                px-5 py-2.5 pr-10 rounded-xl shadow-md transition
+                appearance-none w-full sm:w-auto
+                px-4 py-2 md:px-5 md:py-2.5 pr-10 rounded-xl shadow-md transition
 
                 bg-white text-black border border-gray-300
                 hover:border-purple-500
@@ -126,8 +150,8 @@ export default function CalendarView({ tasks }: { tasks: Task[] }) {
             onClick={handleDownloadImage}
             className="
               bg-purple-600 hover:bg-purple-700
-              text-white px-4 py-2.5 rounded-xl
-              shadow-lg transition
+              text-white px-4 py-2 md:py-2.5 rounded-xl
+              shadow-lg transition text-sm md:text-base whitespace-nowrap
             "
           >
             📸 ดาวน์โหลด
@@ -138,17 +162,19 @@ export default function CalendarView({ tasks }: { tasks: Task[] }) {
 
       {/* CALENDAR */}
       <div
-          ref={calendarRef}
-          className="
-            calendar-wrapper
-            rounded-2xl p-5 shadow-inner
-            bg-gray-50 border border-gray-200
-            dark:bg-[#111827] dark:border-slate-800
-          "
-        >
+        ref={calendarRef}
+        className="
+          calendar-wrapper
+          rounded-2xl p-2 md:p-5 shadow-inner
+          bg-gray-50 border border-gray-200
+          dark:bg-[#111827] dark:border-slate-800
+        "
+      >
         <FullCalendar
+          ref={fullCalendarRef}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          initialView="timeGridWeek"
+          viewClassNames="responsive-calendar"
+          initialView={calendarView} 
           allDaySlot={false}
           headerToolbar={{
             left: "prev,next today",
