@@ -18,7 +18,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Tooltip from "../components/Tooltip";
 
-// 🌟 กำหนด Base URL ไว้ตรงนี้เพื่อให้จัดการง่ายขึ้น!
 const API_BASE_URL = "https://server-1-89ke.onrender.com";
 
 type Status = "todo" | "doing" | "done";
@@ -122,7 +121,6 @@ useEffect(() => {
 
   if (!boardId) return;
 
-  // 🌟 ใช้ API_BASE_URL แทน localhost
   axios.get(`${API_BASE_URL}/api/boards/${boardId}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -142,7 +140,7 @@ const [user, setUser] = useState<any>(null);
 const [theme, setTheme] = useState("light");
 
 useEffect(() => {
-  // 🌟 ใช้ API_BASE_URL แทน localhost
+
   axios.get(`${API_BASE_URL}/api/auth/me`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -171,7 +169,6 @@ const getInitials = (name: string) =>
   const payload = JSON.parse(atob(token.split(".")[1]));
   const userId = payload.id;
 
-  // 🌟 ใช้ API_BASE_URL แทน localhost
   const newSocket: Socket = io(API_BASE_URL, {
     transports: ["websocket"]
   });
@@ -179,7 +176,7 @@ const getInitials = (name: string) =>
   newSocket.emit("join", userId);
 
   newSocket.on("taskUpdated", () => {
-    loadTasks(); // 🔥 จะใช้ boardId ล่าสุด
+    loadTasks(); 
   });
 
   newSocket.on("newNotification", () => {
@@ -192,7 +189,7 @@ const getInitials = (name: string) =>
     newSocket.disconnect();
   };
 
-}, [boardId]); // 🔥 สำคัญมาก
+}, [boardId]);
 
   /* ================= JOIN BOARD ROOM ================= */
 
@@ -243,7 +240,6 @@ const getInitials = (name: string) =>
   const fetchBoards = async () => {
 
     try {
-      // 🌟 ใช้ API_BASE_URL แทน localhost
       const res = await axios.get(
         `${API_BASE_URL}/api/boards`,
         {
@@ -405,7 +401,6 @@ const filteredBoards = activeBoards.filter(b =>
             onClick={() => setOpenBoards(false)}
           />
 
-          {/* 📱 PANEL สลับบอร์ด: แก้ไขให้ Responsive เต็มรูปแบบ */}
           <div className="
                 absolute left-1/2 -translate-x-1/2 sm:left-0 sm:translate-x-0 mt-2 
                 w-[calc(100vw-2rem)] sm:w-[420px] max-w-[420px]
@@ -436,7 +431,6 @@ const filteredBoards = activeBoards.filter(b =>
             {/* RECENT */}
             {search ? (
 
-            // 🔍 ตอนค้นหา
             <div className="grid grid-cols-2 gap-3">
               {filteredBoards.map(board => (
                 <div
@@ -457,7 +451,6 @@ const filteredBoards = activeBoards.filter(b =>
 
           ) : (
 
-            // 🕒 ตอนปกติ (ไม่ค้นหา)
             <div className="mb-4">
               <p className="text-xs sm:text-sm text-gray-400 mb-2">🕒 เมื่อเร็ว ๆ นี้</p>
 
@@ -625,7 +618,7 @@ const filteredBoards = activeBoards.filter(b =>
               onClick={() => setOpenProfile(false)}
             />
 
-            {/* 📱 ป๊อปอัปโปรไฟล์อัปเดตให้รองรับมือถือ */}
+            {/* ป๊อปอัปโปรไฟล์อัปเดตให้รองรับมือถือ */}
             <div className="
                   absolute right-0 mt-2 w-[calc(100vw-2rem)] sm:w-64 max-w-xs
                   bg-white text-black border border-gray-200
@@ -636,7 +629,7 @@ const filteredBoards = activeBoards.filter(b =>
               {/* profile */}
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold shrink-0">
-                  {user ? getInitials(user.name) : ""}
+                  {/*user ? getInitials(user.name) : ""*/}
                 </div>
 
                 <div className="overflow-hidden">
@@ -678,7 +671,7 @@ const filteredBoards = activeBoards.filter(b =>
                     transition duration-200
                   "
               >
-                🎨 เปลี่ยนธีม ({theme === "light" ? "Light" : "Dark"})
+                 เปลี่ยนธีม ({theme === "light" ? "Light" : "Dark"})
               </button>
 
               <hr className="my-2" />

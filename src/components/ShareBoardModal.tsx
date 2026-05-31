@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import { shareBoard } from "../services/taskService";
-import api from "../utils/axios"; // 🔥 นำเข้า api ของเรามาใช้
+import api from "../utils/axios"; 
 
 type Member = {
   userId: string;
@@ -14,7 +14,6 @@ type Props = {
   onClose: () => void;
 };
 
-// 🔥 ลิงก์ Backend สำหรับ Socket
 const SOCKET_URL = "https://server-1-89ke.onrender.com";
 
 export default function ShareBoardModal({ boardId, onClose }: Props) {
@@ -49,7 +48,7 @@ export default function ShareBoardModal({ boardId, onClose }: Props) {
 
   /* REALTIME */
   useEffect(() => {
-    // 🔥 แก้ URL และบังคับใช้ websocket เพื่อแก้ปัญหา polling error
+
     const socket = io(SOCKET_URL, {
       transports: ["websocket"],
     });
@@ -112,7 +111,7 @@ export default function ShareBoardModal({ boardId, onClose }: Props) {
   /* LEAVE BOARD */
   const leaveBoard = async () => {
     try {
-      // 🎉 ใช้ api ยิง POST
+      
       await api.post(`/api/tasks/${boardId}/leave`);
       window.location.reload();
     } catch (err) {

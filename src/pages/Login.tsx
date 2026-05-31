@@ -18,7 +18,6 @@ export default function Login() {
     try {
       const res = await login({ email, password });
 
-      // 🔥 เก็บ token
       localStorage.setItem("token", res.token);
 
       setSuccess(true);
@@ -34,7 +33,6 @@ export default function Login() {
 
   return (
     <>
-      {/* ✅ SUCCESS BANNER : ปรับแต่งเป็นสไตล์ Glassmorphism มีแอนิเมชันสไลด์ลงมา */}
       {success && (
         <div className="fixed top-8 left-1/2 -translate-x-1/2 z-50 animate-in slide-in-from-top-8 fade-in duration-300">
           <div className="flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/30 backdrop-blur-md text-emerald-400 px-6 py-3.5 rounded-2xl shadow-2xl shadow-emerald-500/10 text-sm font-semibold tracking-wide">
@@ -61,7 +59,7 @@ export default function Login() {
               Enter your credentials to access your account and continue your work.
             </p>
 
-            {/* ❌ Error Message */}
+            {/* Error Message */}
             {error && (
               <div className="mb-6 flex items-center gap-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 p-4 text-sm animate-in shake duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">

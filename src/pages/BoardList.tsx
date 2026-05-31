@@ -115,7 +115,6 @@ export default function BoardList() {
           >
             <button
               onClick={() => {
-                // 👇 แก้ตรงนี้: แค่สั่งให้เก็บข้อมูลบอร์ด และเปิด Popup
                 setConfirmBoard(board);
                 setOpenMenuId(null);
               }}
@@ -177,7 +176,7 @@ export default function BoardList() {
         {board.name}
       </div>
 
-      {/* 🔥 ลบถาวร */}
+      {/* ลบถาวร */}
       <button
         onClick={() => {
           setConfirmBoard({ ...board, delete: true });
@@ -187,7 +186,7 @@ export default function BoardList() {
         ลบถาวร
       </button>
 
-      {/* 🔥 กู้คืน */}
+      {/* กู้คืน */}
       <button
         onClick={async () => {
 
@@ -247,7 +246,7 @@ export default function BoardList() {
         <button
           onClick={() => {
             if (confirmBoard.delete) {
-              setDoubleConfirm(true); // 🔥 เปิด modal ซ้อน
+              setDoubleConfirm(true); 
             } else {
               // ปิดบอร์ดปกติ
               axios.put(
@@ -262,7 +261,6 @@ export default function BoardList() {
                 setConfirmBoard(null);
                 fetchBoards();
               }).catch((err) => {
-                // 👇 ดัก Error ตรงนี้
                 setConfirmBoard(null);
                 setErrorMsg(err.response?.data?.message || "คุณไม่มีสิทธิ์ปิดบอร์ดนี้");
               });
@@ -511,7 +509,6 @@ export default function BoardList() {
                 แจ้งเตือนระบบ
               </h3>
 
-              {/* 🔥 ดักจับภาษาอังกฤษ ถ้าเป็น No permission ให้แปลเป็นไทย */}
               <p className="text-[#64748b] dark:text-slate-300 text-sm leading-relaxed mb-5 px-2">
                 {errorMsg === "No permission"
                   ? "คุณไม่มีสิทธิ์ดำเนินการในส่วนนี้"

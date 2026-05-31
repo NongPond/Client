@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// 🔥 เปลี่ยนจาก localhost เป็นลิงก์หลังบ้าน
 const API = "https://server-1-89ke.onrender.com/api/tasks";
 
 const getAuthHeader = () => ({
@@ -134,7 +133,6 @@ export const createTask = async (
 };
 
 
-
 /* ================= UPDATE TASK ================= */
 
 export const updateTask = async (
@@ -177,8 +175,6 @@ export const updateTask = async (
 
 };
 
-
-
 /* ================= DELETE TASK ================= */
 
 export const deleteTask = async (id: string) => {
@@ -191,8 +187,6 @@ export const deleteTask = async (id: string) => {
   return res.data;
 
 };
-
-
 
 /* ================= SHARE BOARD ================= */
 
@@ -214,8 +208,6 @@ export const shareBoard = async (
   return res.data;
 
 };
-
-
 
 /* ================= LEAVE BOARD ================= */
 

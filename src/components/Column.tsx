@@ -84,7 +84,6 @@ export default function Column({
       return
     }
 
-    // 🔥 แก้ไข: แปลงเป็น ISOString ก่อนส่งไป API เพื่อป้องกันเวลาเพี้ยน (Timezone)
     const result = await createTask({
       title: newTitle,
       status: column.id,
@@ -176,7 +175,6 @@ export default function Column({
               type="datetime-local"
               value={startTime}
               onChange={e => setStartTime(e.target.value)}
-              // 🔥 แก้ไข: ใช้ fields-wrapper:opacity-0 เพื่อให้ไอคอนปฏิทินไม่หาย
               className={`w-full p-2 h-10 rounded bg-gray-800 text-white text-sm focus:outline-none [color-scheme:dark] ${
                 !startTime ? "[&::-webkit-datetime-edit-fields-wrapper]:opacity-0" : ""
               }`}
@@ -194,7 +192,6 @@ export default function Column({
               type="datetime-local"
               value={endTime}
               onChange={e => setEndTime(e.target.value)}
-              // 🔥 แก้ไข: ใช้ fields-wrapper:opacity-0 เพื่อให้ไอคอนปฏิทินไม่หาย
               className={`w-full p-2 h-10 rounded bg-gray-800 text-white text-sm focus:outline-none [color-scheme:dark] ${
                 !endTime ? "[&::-webkit-datetime-edit-fields-wrapper]:opacity-0" : ""
               }`}

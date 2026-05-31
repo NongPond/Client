@@ -12,26 +12,19 @@ export default function GuestHome() {
       selection:bg-blue-200 selection:text-blue-900
     ">
 
-      {/* ===== NAVBAR (Glassmorphism) ===== */}
-      {/* 🛠️ แก้ไข: ปรับ px-4 สำหรับมือถือ และลด py ลงนิดหน่อย */}
       <div className="
         flex items-center justify-between px-4 sm:px-6 lg:px-12 py-3 sm:py-4
         bg-white/80 dark:bg-[#0b1324]/80 backdrop-blur-md
         border-b border-gray-200/60 dark:border-gray-800
         sticky top-0 z-50 transition-all
       ">
-        {/* LEFT: Logo & Menus */}
         <div className="flex items-center gap-2 sm:gap-8">
-          {/* 🛠️ แก้ไข: ลดขนาด text โลโก้ในมือถือเป็น text-lg (เดิม 2xl) และไอคอนเป็น 2xl (เดิม 3xl) */}
           <div className="flex items-center gap-1.5 sm:gap-2 text-lg sm:text-2xl font-bold text-blue-600 dark:text-blue-400 cursor-pointer hover:opacity-80 transition">
-            <span className="text-2xl sm:text-3xl drop-shadow-sm">🧩</span> 
-            {/* 🛠️ แก้ไข: ใช้ whitespace-nowrap ป้องกันการตกบรรทัด */}
+            <span className="text-2xl sm:text-3xl drop-shadow-sm"></span> 
             <span className="tracking-tight whitespace-nowrap">Task Management</span> 
           </div>
         </div>
 
-        {/* RIGHT: Auth Buttons */}
-        {/* 🛠️ แก้ไข: ลด gap และบังคับไม่ให้บีบปุ่ม (shrink-0) */}
         <div className="flex gap-2 sm:gap-4 items-center shrink-0">
           <button
             onClick={() => navigate("/login")}
@@ -58,17 +51,13 @@ export default function GuestHome() {
         </div>
       </div>
 
-      {/* ===== HERO SECTION ===== */}
-      {/* 🛠️ แก้ไข: ปรับ py สำหรับมือถือไม่ให้ห่างเกินไป */}
       <div className="
         max-w-[1200px] mx-auto
         flex flex-col lg:flex-row items-center justify-between
         px-6 lg:px-12 py-10 sm:py-16 lg:py-28 gap-10 lg:gap-8
       ">
 
-        {/* LEFT CONTENT */}
         <div className="w-full lg:w-7/12 space-y-6 sm:space-y-8 relative z-10 text-center lg:text-left">
-          {/* 🛠️ แก้ไข: ลดขนาด Heading มือถือเป็น text-3xl */}
           <h1 className="text-3xl sm:text-5xl lg:text-[3.5rem] font-bold leading-[1.3] sm:leading-[1.25] tracking-tight">
             <span className="text-gray-900 dark:text-white block sm:inline">
                 จัดการงานง่าย ไร้รอยต่อ
@@ -80,7 +69,6 @@ export default function GuestHome() {
             ลากและวางงานของคุณบนกระดาน Kanban ทำงานร่วมกับทีมได้อย่างอิสระ พร้อมระบบผู้ช่วยแนะนำเวลาว่างที่ทำให้คุณไม่พลาดทุกกำหนดการสำคัญ
           </p>
 
-          {/* EMAIL INPUT FORM */}
           <div className="pt-2 max-w-lg mx-auto lg:mx-0">
             <div className="flex flex-col sm:flex-row gap-2 bg-white dark:bg-gray-900 shadow-lg shadow-blue-900/5 rounded-2xl border border-gray-200 dark:border-gray-800 p-2 focus-within:ring-2 focus-within:ring-blue-500/50 transition-all">
               <input
@@ -110,9 +98,7 @@ export default function GuestHome() {
           </div>
         </div>
 
-        {/* RIGHT IMAGE */}
         <div className="w-full lg:w-1/2 relative flex justify-center lg:justify-end lg:translate-x-12 mt-4 lg:mt-0">
-          {/* Decorator Blur Blob */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-blue-400/30 via-purple-400/20 to-orange-300/20 blur-3xl rounded-full -z-10 dark:opacity-50"></div>
           
           <img
@@ -130,7 +116,6 @@ export default function GuestHome() {
 
       </div>
 
-      {/* ===== FEATURES SHOWCASE SECTION ===== */}
       <div className="relative bg-white dark:bg-[#0f172a] py-16 lg:py-28 border-t border-gray-100 dark:border-gray-800">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12 relative z-10">
           
@@ -142,7 +127,6 @@ export default function GuestHome() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            {/* Cards (เนื้อหาเดิม ไม่เปลี่ยน) */}
             <div className="group bg-gray-50 dark:bg-[#1e293b] p-8 rounded-3xl hover:bg-white dark:hover:bg-[#0b1324] hover:shadow-2xl hover:shadow-blue-900/5 border border-transparent hover:border-gray-200 dark:hover:border-gray-700 transition-all duration-300 hover:-translate-y-1">
               <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm group-hover:scale-110 transition-transform">👥</div>
               <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-4">จัดการบอร์ดและทีม</h4>
@@ -187,7 +171,6 @@ export default function GuestHome() {
         </div>
       </div>
 
-      {/* ===== FINAL CALL-TO-ACTION SECTION ===== */}
       <div className="relative py-16 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-blue-600 dark:bg-blue-900"></div>
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-indigo-700 dark:from-blue-800 dark:to-indigo-950 opacity-90"></div>
@@ -215,7 +198,6 @@ export default function GuestHome() {
         </div>
       </div>
 
-      {/* ===== FOOTER ===== */}
       <footer className="
         bg-white dark:bg-[#0b1324]
         border-t border-gray-100 dark:border-gray-800
@@ -223,7 +205,7 @@ export default function GuestHome() {
       ">
         <div className="max-w-[1200px] mx-auto flex flex-col justify-center items-center gap-4">
           <div className="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-200">
-            <span className="text-xl sm:text-2xl mr-1">🧩</span> Task Management
+            <span className="text-xl sm:text-2xl mr-1"></span> Task Management
           </div>
         </div>
       </footer>

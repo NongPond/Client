@@ -8,7 +8,6 @@ export default function Verify() {
 
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
   
-  // ✅ 2. สร้างตัวแปรกันการยิง API ซ้ำ
   const hasFetched = useRef(false);
 
   useEffect(() => {
@@ -18,12 +17,10 @@ export default function Verify() {
     }
 
     const confirmEmail = async () => {
-      // ✅ 3. ถ้าเคยยิง API ไปแล้ว ให้หยุดทำงานทันที (ป้องกัน React ยิงเบิ้ล 2 รอบ)
       if (hasFetched.current) return; 
       hasFetched.current = true;
 
       try {
-        // แก้เป็น Path ที่ถูกต้องของคุณ เช่น /api/auth/verify-email
         await axios.post("https://server-1-89ke.onrender.com/api/auth/verify", { 
   token: token 
 });

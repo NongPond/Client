@@ -1,6 +1,5 @@
 import api from "../utils/axios";
 
-// 🔥 เราใช้แค่ Path ต่อท้ายก็พอ เพราะ Base URL และ Token ถูกจัดการใน api แล้ว!
 const ENDPOINT = "/api/notifications";
 
 export const getNotifications = async () => {
