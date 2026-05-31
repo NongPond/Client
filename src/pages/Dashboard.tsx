@@ -625,7 +625,7 @@ const filteredBoards = activeBoards.filter(b =>
                   dark:bg-[#1f2937] dark:text-white dark:border-gray-700
                   rounded-xl shadow-2xl z-50 p-4
                 ">
-
+<Tooltip text="Profile">
               {/* profile */}
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold shrink-0">
@@ -641,6 +641,7 @@ const filteredBoards = activeBoards.filter(b =>
                   </div>
                 </div>
               </div>
+              </Tooltip>
 
               <hr className="mb-3" />
 
