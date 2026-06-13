@@ -7,7 +7,7 @@
     "types": ["vite/client"],
     "skipLibCheck": true,
 
-    "moduleResolution": "node10",
+    "moduleResolution": "node",
     "ignoreDeprecations": "6.0" ,
     "moduleDetection": "force",
     "noEmit": true,
