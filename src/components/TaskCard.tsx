@@ -74,7 +74,7 @@ export default function TaskCard({
           group rounded-lg shadow-md p-3 text-sm cursor-pointer relative
           transition border
           ${selected
-            ? "bg-gray-100 text-"
+            ? "bg-gray-100 text-black"
             : "dark:bg-gray-600 dark:text-white"}
             shadow-md hover:shadow-lg
         `}
