@@ -75,7 +75,7 @@ export default function TaskCard({
           transition border
           ${selected
             ? "bg-gray-100 text-black"
-            : "dark:bg-gray-600 dark:text-white"}
+            : "dark:bg-gray-600 dark:text-Black"}
             shadow-md hover:shadow-lg
         `}
       >

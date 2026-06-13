@@ -34,7 +34,6 @@ export default function ShareBoardModal({ boardId, onClose }: Props) {
   /* LOAD MEMBERS */
   const loadMembers = async () => {
     try {
-      // 🎉 เปลี่ยนจาก fetch เป็น api โค้ดสั้นลง ไม่ต้องแนบ Token เองแล้ว
       const res = await api.get(`/api/tasks/board/${boardId}/members`);
       setMembers(res.data);
     } catch (err) {
@@ -89,7 +88,7 @@ export default function ShareBoardModal({ boardId, onClose }: Props) {
   /* UPDATE ROLE */
   const updateRole = async (userId: string, newRole: string) => {
     try {
-      // 🎉 ใช้ api ยิง PUT
+    
       await api.put(`/api/tasks/board/${boardId}/member/${userId}`, { role: newRole });
       loadMembers();
     } catch (err) {
@@ -100,7 +99,7 @@ export default function ShareBoardModal({ boardId, onClose }: Props) {
   /* REMOVE MEMBER */
   const removeMember = async (userId: string) => {
     try {
-      // 🎉 ใช้ api ยิง DELETE
+    
       await api.delete(`/api/tasks/board/${boardId}/member/${userId}`);
       loadMembers();
     } catch (err) {

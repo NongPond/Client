@@ -158,7 +158,6 @@ useEffect(() => {
 const getInitials = (name: string) =>
   name?.split(" ").map(n => n[0]).join("").toUpperCase();
 
-
   /* ================= CONNECT SOCKET ================= */
 
   useEffect(() => {
@@ -575,8 +574,6 @@ const filteredBoards = activeBoards.filter(b =>
                   className="fixed inset-0 z-40"
                   onClick={() => setOpenNoti(false)}
                 />
-
-                {/* 📱 ป๊อปอัปแจ้งเตือนอัปเดตให้รองรับมือถือ */}
                 <div className="absolute right-0 mt-2 w-[calc(100vw-2rem)] sm:w-80 max-w-sm bg-gray-800 rounded-lg shadow-2xl border border-gray-700 z-50">
 
                   <NotificationDropdown
@@ -625,11 +622,11 @@ const filteredBoards = activeBoards.filter(b =>
                   dark:bg-[#1f2937] dark:text-white dark:border-gray-700
                   rounded-xl shadow-2xl z-50 p-4
                 ">
-<Tooltip text="Profile">
+
               {/* profile */}
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-white font-bold shrink-0">
-                  {/*user ? getInitials(user.name) : ""*/}
+                  {user ? getInitials(user.name) : ""}
                 </div>
 
                 <div className="overflow-hidden">
@@ -641,7 +638,6 @@ const filteredBoards = activeBoards.filter(b =>
                   </div>
                 </div>
               </div>
-              </Tooltip>
 
               <hr className="mb-3" />
 
